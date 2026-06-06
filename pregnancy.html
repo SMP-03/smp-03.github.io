@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3123996159086312"
+     crossorigin="anonymous"></script>
+  <title>Pregnancy Due Date Calculator</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #ec4899;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #db2777;
+    }
+
+    .result {
+      margin-top: 20px;
+      background: #0f172a;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #93c5fd;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    * {
+  box-sizing: border-box;
+}
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🤰 Pregnancy Due Date Calculator</h1>
+
+  <label>First Day of Last Menstrual Period (LMP)</label>
+  <input type="date" id="lmp">
+
+  <button onclick="calculateDueDate()">Calculate</button>
+
+  <div class="result" id="result" style="display:none;"></div>
+
+  <a href="index.html">← Back to Home</a>
+</div>
+
+<script>
+function calculateDueDate() {
+  let lmp = document.getElementById("lmp").value;
+
+  if (!lmp) {
+    alert("Please select a date.");
+    return;
+  }
+
+  let lmpDate = new Date(lmp);
+
+  // Add 280 days (40 weeks)
+  let dueDate = new Date(lmpDate);
+  dueDate.setDate(dueDate.getDate() + 280);
+
+  // Pregnancy milestones
+  let trimester1 = new Date(lmpDate);
+  trimester1.setDate(trimester1.getDate() + 84); // 12 weeks
+
+  let trimester2 = new Date(lmpDate);
+  trimester2.setDate(trimester2.getDate() + 196); // 28 weeks
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").innerHTML = `
+    <strong>Estimated Due Date:</strong><br>
+    ${dueDate.toDateString()}<br><br>
+
+    <strong>1st Trimester Ends:</strong><br>
+    ${trimester1.toDateString()}<br><br>
+
+    <strong>2nd Trimester Ends:</strong><br>
+    ${trimester2.toDateString()}
+  `;
+}
+</script>
+
+</body>
+</html>

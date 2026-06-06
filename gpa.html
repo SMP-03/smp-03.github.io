@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3123996159086312"
+     crossorigin="anonymous"></script>
+  <title>GPA Calculator</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      padding: 30px 0;
+    }
+
+    .container {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 8px;
+      text-align: center;
+    }
+
+    input {
+      width: 90%;
+      padding: 8px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+      text-align: center;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 12px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .result {
+      margin-top: 15px;
+      background: #0f172a;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .actions button {
+      flex: 1;
+      background: #475569;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #93c5fd;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    * {
+  box-sizing: border-box;
+}
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>GPA Calculator</h1>
+
+  <table id="table">
+    <tr>
+      <th>Subject</th>
+      <th>Grade (0–4 or 0–100)</th>
+    </tr>
+
+    <tr>
+      <td><input type="text" placeholder="Math"></td>
+      <td><input type="number" class="grade"></td>
+    </tr>
+
+    <tr>
+      <td><input type="text" placeholder="Science"></td>
+      <td><input type="number" class="grade"></td>
+    </tr>
+
+    <tr>
+      <td><input type="text" placeholder="English"></td>
+      <td><input type="number" class="grade"></td>
+    </tr>
+  </table>
+
+  <div class="actions">
+    <button onclick="addRow()">+ Add Subject</button>
+    <button onclick="calculateGPA()">Calculate GPA</button>
+  </div>
+
+  <div class="result" id="result" style="display:none;"></div>
+
+  <a href="index.html">← Back to Home</a>
+</div>
+
+<script>
+function addRow() {
+  let table = document.getElementById("table");
+  let row = table.insertRow();
+
+  row.innerHTML = `
+    <td><input type="text" placeholder="Subject"></td>
+    <td><input type="number" class="grade"></td>
+  `;
+}
+
+function calculateGPA() {
+  let grades = document.querySelectorAll(".grade");
+  let sum = 0;
+  let count = 0;
+
+  grades.forEach(input => {
+    let val = parseFloat(input.value);
+    if (!isNaN(val)) {
+      sum += val;
+      count++;
+    }
+  });
+
+  if (count === 0) {
+    alert("Please enter at least one grade.");
+    return;
+  }
+
+  let gpa = sum / count;
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").innerHTML =
+    `<strong>Your GPA:</strong> ${gpa.toFixed(2)}`;
+}
+</script>
+
+</body>
+</html>

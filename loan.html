@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3123996159086312"
+     crossorigin="anonymous"></script>
+  <title>Loan Calculator</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: #fff;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #1e293b;
+      padding: 25px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 24px;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #3b82f6;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #2563eb;
+    }
+
+    .result {
+      margin-top: 20px;
+      background: #0f172a;
+      padding: 15px;
+      border-radius: 8px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #93c5fd;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    * {
+  box-sizing: border-box;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>Loan Calculator</h1>
+
+  <label>Loan Amount (₱)</label>
+  <input type="number" id="amount" placeholder="e.g. 10000">
+
+  <label>Annual Interest Rate (%)</label>
+  <input type="number" id="rate" placeholder="e.g. 12">
+
+  <label>Loan Term (Years)</label>
+  <input type="number" id="years" placeholder="e.g. 2">
+
+  <button onclick="calculateLoan()">Calculate</button>
+
+  <div class="result" id="result" style="display:none;"></div>
+
+  <a href="index.html">← Back to Home</a>
+</div>
+
+<script>
+function calculateLoan() {
+  let amount = parseFloat(document.getElementById("amount").value);
+  let rate = parseFloat(document.getElementById("rate").value);
+  let years = parseFloat(document.getElementById("years").value);
+
+  if (isNaN(amount) || isNaN(rate) || isNaN(years)) {
+    alert("Please fill in all fields correctly.");
+    return;
+  }
+
+  let monthlyRate = rate / 100 / 12;
+  let months = years * 12;
+
+  let monthlyPayment = (amount * monthlyRate) / (1 - Math.pow(1 + monthlyRate, -months));
+  let totalPayment = monthlyPayment * months;
+  let totalInterest = totalPayment - amount;
+
+  document.getElementById("result").style.display = "block";
+  document.getElementById("result").innerHTML = `
+    <strong>Monthly Payment:</strong> ₱${monthlyPayment.toFixed(2)}<br>
+    <strong>Total Payment:</strong> ₱${totalPayment.toFixed(2)}<br>
+    <strong>Total Interest:</strong> ₱${totalInterest.toFixed(2)}
+  `;
+}
+</script>
+
+</body>
+</html>
